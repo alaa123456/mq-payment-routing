@@ -1,0 +1,66 @@
+<div class="modal-dialog">
+  <h1 mat-dialog-title>Ajouter un Nouveau Partenaire</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="partnerForm">
+      <div class="form-container">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Nom de l'Alias</mat-label>
+          <input matInput formControlName="alias" placeholder="Alias unique pour le partenaire" />
+          <mat-error *ngIf="partnerForm.get('alias')?.hasError('required')">
+            L'alias est nécessaire
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Type du Partenaire</mat-label>
+          <input matInput formControlName="type" placeholder="Type du partenaire" />
+          <mat-error *ngIf="partnerForm.get('type')?.hasError('required')">
+            Le type est requis
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Direction</mat-label>
+          <mat-select formControlName="direction">
+            <mat-option value="INBOUND">Inbound</mat-option>
+            <mat-option value="OUTBOUND">Outbound</mat-option>
+          </mat-select>
+          <mat-error *ngIf="partnerForm.get('direction')?.hasError('required')">
+            La direction doit être spécifiée
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Type de Flux</mat-label>
+          <mat-select formControlName="processedFlowType">
+            <mat-option value="MESSAGE">Message</mat-option>
+            <mat-option value="ALERTING">Alerting</mat-option>
+            <mat-option value="NOTIFICATION">Notification</mat-option>
+          </mat-select>
+          <mat-error *ngIf="partnerForm.get('processedFlowType')?.hasError('required')">
+            Le type de flux est obligatoire
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Application associée</mat-label>
+          <input matInput formControlName="application" placeholder="Nom de l'application" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="Entrez des informations détaillées sur ce partenaire"></textarea>
+          <mat-error *ngIf="partnerForm.get('description')?.hasError('required')">
+            Une description est nécessaire
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button mat-dialog-close color="warn">Annuler</button>
+    <button mat-raised-button color="primary" [disabled]="partnerForm.invalid" (click)="savePartner()">
+      Enregistrer 
+    </button>
+  </div>
+</div>

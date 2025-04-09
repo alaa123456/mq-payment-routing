@@ -1,0 +1,53 @@
+<mat-card class="message-card">
+  <mat-card-header>
+    <div class="header-content">
+      <mat-card-title class="card-title">Lister tous les Messages</mat-card-title>
+
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <table mat-table [dataSource]="dataSource" class="message-table">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let message">{{message.id}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef>Content</th>
+        <td mat-cell *matCellDef="let message">{{message.content}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let message">{{message.createdAt | date:'medium'}}</td>
+      </ng-container>
+
+   
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let message">
+          <button mat-icon-button (click)="viewDetails(message)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+
+
+    <mat-paginator 
+      [length]="resultsLength"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25]"
+      (page)="paginationChnage($event)"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

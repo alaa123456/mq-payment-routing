@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  mq:
+    image: icr.io/ibm-messaging/mq:latest
+    container_name: ibm-mq
+    environment:
+      - LICENSE=accept
+      - MQ_QMGR_NAME=QM1
+      - MQ_APP_USER=app
+      - MQ_APP_PASSWORD=passw0rd
+      - MQ_ADMIN_USER=admin
+      - MQ_ADMIN_PASSWORD=admin
+    volumes:
+      - qm1data:/mnt/mqm
+    ports:
+      - "1414:1414"
+      - "9443:9443"
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      - POSTGRES_DB=mqdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  
+  mq-routing-ui:
+    build:
+      context: ./mq-routing-ui
+      dockerfile: Dockerfile
+    container_name: mq-routing-ui
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    depends_on:
+      - mq-routing-server
+
+  mq-routing-server:
+    build:
+      context: ./mq-routing-app
+      dockerfile: Dockerfile
+    container_name: mq-routing-server
+    depends_on:
+      - postgres
+      - mq
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mqdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      IBM_MQ_QUEUE_MANAGER: QM1
+      IBM_MQ_CHANNEL: DEV.APP.SVRCONN
+      IBM_MQ_CONN_NAME: mq(1414)
+      IBM_MQ_USER: app
+      IBM_MQ_PASSWORD: passw0rd
+   
+
+
+volumes:
+  qm1data:
+  pgdata:
+

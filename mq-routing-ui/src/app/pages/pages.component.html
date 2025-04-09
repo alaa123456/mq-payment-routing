@@ -1,0 +1,11 @@
+<app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+
+<mat-drawer-container class="main-container" autosize fullscreen>
+  <mat-drawer #drawer mode="side" [opened]="isOpened" class="main-sidenav">
+    <app-sidebar [menus]="menus" [isOpened]="isOpened"></app-sidebar>
+  </mat-drawer>
+
+  <div class="main-panel">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

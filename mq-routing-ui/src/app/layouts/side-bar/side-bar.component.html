@@ -1,0 +1,26 @@
+<div *ngFor="let menu of menus" class="side-bar">
+    <mat-accordion *ngIf="menu.menuItem.length > 0">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="sidenav-icon">{{ menu.icon }}</mat-icon>
+            {{ menu.title }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <a
+            routerLinkActive="sidenav-menu-active"
+            *ngFor="let subMenu of menu.menuItem"
+            [routerLink]="subMenu.path"
+          >
+            <mat-list-item class="multi-level-menu">
+              <mat-panel-title>
+                <mat-icon class="sidenav-icon">{{ subMenu.icon }}</mat-icon>
+                {{ subMenu.title }}
+              </mat-panel-title>
+            </mat-list-item>
+          </a>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>

@@ -1,0 +1,62 @@
+.modal-dialog {
+  width: 650px;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 20px;
+
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  margin-bottom: 12px;
+}
+
+mat-dialog-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #004b67;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+button.mat-raised-button {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+button.mat-raised-button[color="warn"] {
+  background-color: #ff4081;
+  color: white;
+}
+
+button.mat-raised-button[color="primary"] {
+  background-color: #00796b;
+  color: white;
+}
+
+mat-form-field.mat-form-field {
+  width: 100%;
+}
+
+mat-label {
+  font-weight: semiBold;
+  color: #fcfafa;
+}
+
+mat-input {
+  background-color: #fff;
+}
+
+mat-error {
+  color: #e53935;
+}
