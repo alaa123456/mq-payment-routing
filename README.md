@@ -8,7 +8,7 @@
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-directory>
+   cd mq-payment-routing
    ```
 
 2. Start the application stack:
@@ -19,7 +19,7 @@
 3. Access the components:
     - UI: http://localhost
     - Backend API: http://localhost:8080
-    - IBM MQ Console: https://localhost:9443/ibmmq/console (credentials: admin/passw0rd)
+    - IBM MQ Console: https://localhost:9443/ibmmq/console (credentials: admin/admin)
     - PostgreSQL: localhost:5432 
 
 4. Stop the application:
