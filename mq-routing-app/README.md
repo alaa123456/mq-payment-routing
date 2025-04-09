@@ -65,7 +65,7 @@ java -jar target/mq-routing-app-0.0.1.jar
 ```
 
 ### Testing
-The application includes unit tests and integration tests using TestContainers, which provides containerized instances of PostgreSQL for testing:
+The application includes unit tests and integration tests using TestContainers, which provides containerized instances of ibm MQ service for testing:
 
 ```bash
 mvn test
